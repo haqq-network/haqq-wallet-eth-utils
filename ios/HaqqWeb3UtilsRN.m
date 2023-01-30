@@ -9,6 +9,19 @@ RCT_EXTERN_METHOD(
                   )
 
 RCT_EXTERN_METHOD(
+                  seedFromMnemonic: (NSString *) mnemonicPhrase
+                  resolve: (RCTPromiseResolveBlock) resolve
+                  rejecter: (RCTPromiseRejectBlock) reject
+                  )
+
+RCT_EXTERN_METHOD(
+                  derive: (NSString *) seed
+                  path: (NSString *) path
+                  resolve: (RCTPromiseResolveBlock) resolve
+                  rejecter: (RCTPromiseRejectBlock) reject
+                  )
+
+RCT_EXTERN_METHOD(
                 sign: (NSString *) privateKey
                 message: (NSString *) message
                 resolve: (RCTPromiseResolveBlock) resolve

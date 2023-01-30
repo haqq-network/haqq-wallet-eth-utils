@@ -29,6 +29,23 @@ export function generateMnemonic(
   return HaqqWeb3UtilsRN.generateMnemonic(strength);
 }
 
+
+export function seedFromMnemonic(mnemonicPhrase: string): Promise<string> {
+  return HaqqWeb3UtilsRN.seedFromMnemonic(mnemonicPhrase);
+}
+
+export function derive(seed: string, path: string): Promise<string> {
+  return HaqqWeb3UtilsRN.derive(seed, path);
+}
+
+/**
+ * Get account address and public key by privateKey
+ * @param {string} privateKey Private key
+ */
+export function accountInfo(privateKey: string): Promise<{publicKey: string, address: string}> {
+  return HaqqWeb3UtilsRN.accountInfo(privateKey);
+}
+
 /**
  * Sign transaction
  *

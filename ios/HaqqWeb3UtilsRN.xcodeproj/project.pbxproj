@@ -14,6 +14,7 @@
 		21F2B8BB2987AB650098FAF9 /* String+split.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F2B8BA2987AB650098FAF9 /* String+split.swift */; };
 		21F2B8BD2987AC970098FAF9 /* HDKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F2B8BC2987AC970098FAF9 /* HDKey.swift */; };
 		21F2B8BF2987AE740098FAF9 /* Data+bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F2B8BE2987AE740098FAF9 /* Data+bytes.swift */; };
+		21F2B8C52987BC140098FAF9 /* AccountInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F2B8C42987BC140098FAF9 /* AccountInfoResponse.swift */; };
 		F4FF95D7245B92E800C19C63 /* HaqqWeb3UtilsRN.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* HaqqWeb3UtilsRN.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		21F2B8BA2987AB650098FAF9 /* String+split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+split.swift"; sourceTree = "<group>"; };
 		21F2B8BC2987AC970098FAF9 /* HDKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDKey.swift; sourceTree = "<group>"; };
 		21F2B8BE2987AE740098FAF9 /* Data+bytes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+bytes.swift"; sourceTree = "<group>"; };
+		21F2B8C42987BC140098FAF9 /* AccountInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoResponse.swift; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* HaqqWeb3UtilsRN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HaqqWeb3UtilsRN.m; sourceTree = "<group>"; };
 		F4FF95D5245B92E700C19C63 /* HaqqWeb3UtilsRN-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HaqqWeb3UtilsRN-Bridging-Header.h"; sourceTree = "<group>"; };
 		F4FF95D6245B92E800C19C63 /* HaqqWeb3UtilsRN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaqqWeb3UtilsRN.swift; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				21F2B8C42987BC140098FAF9 /* AccountInfoResponse.swift */,
 				21F2B8BE2987AE740098FAF9 /* Data+bytes.swift */,
 				21F2B8BC2987AC970098FAF9 /* HDKey.swift */,
 				21F2B8BA2987AB650098FAF9 /* String+split.swift */,
@@ -139,6 +142,7 @@
 				21F2B8B92987A1080098FAF9 /* Wallet.swift in Sources */,
 				21F2B8B729879BE20098FAF9 /* MnemonicWordlist.swift in Sources */,
 				217ED47B296809250065FFF8 /* Web3UtilsError.swift in Sources */,
+				21F2B8C52987BC140098FAF9 /* AccountInfoResponse.swift in Sources */,
 				21F2B8BB2987AB650098FAF9 /* String+split.swift in Sources */,
 				21F2B8BD2987AC970098FAF9 /* HDKey.swift in Sources */,
 				F4FF95D7245B92E800C19C63 /* HaqqWeb3UtilsRN.swift in Sources */,
