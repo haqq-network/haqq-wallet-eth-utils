@@ -43,7 +43,7 @@ export function derive(seed: string, path: string): Promise<string> {
  * @param {string} privateKey Private key
  */
 export function accountInfo(privateKey: string): Promise<{publicKey: string, address: string}> {
-  return HaqqWeb3UtilsRN.accountInfo(privateKey);
+  return HaqqWeb3UtilsRN.accountInfo(privateKey).then((r: string) => JSON.parse(r) );
 }
 
 /**
