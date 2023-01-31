@@ -48,12 +48,12 @@ class HaqqWeb3UtilsRN: NSObject {
                 throw Web3UtilsError.hdkey_path
             }
             
-            guard let hdkey = try? HDKey(seed: seed) else {
+            guard let hdkey = try? HDKey(seed: Array(hex: seed)) else {
                 throw Web3UtilsError.hdkey_init
             }
 
             guard let child = hdkey.derive(path: path) else {
-              throw RNEthUtilsError.hdkey_derive
+              throw Web3UtilsError.hdkey_derive
             }
             
             resolve(child.privateKey)
