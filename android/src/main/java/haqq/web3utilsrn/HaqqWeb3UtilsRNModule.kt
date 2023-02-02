@@ -42,7 +42,7 @@ class HaqqWeb3UtilsRNModule(reactContext: ReactApplicationContext) :
         throw IllegalArgumentException("mnemonic_invalid")
       }
 
-      promise.resolve(mnemonic.seed().toHex())
+      promise.resolve(mnemonic.seed())
     } catch (_: IOException) {
 
     } catch (e: java.lang.IllegalArgumentException) {

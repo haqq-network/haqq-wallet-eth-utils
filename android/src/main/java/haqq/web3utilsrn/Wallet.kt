@@ -41,7 +41,7 @@ class Wallet {
   }
 
   fun address(): ByteArray {
-    val pub = publicKey()
+    val pub = Secp256k1.pubkeyCreate(_privateKey)
     val hash = Keccak.digest(pub.slice(1 until pub.size).toByteArray(), KeccakParameter.KECCAK_256)
     return hash.slice(12 until hash.size).toByteArray()
   }
