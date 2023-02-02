@@ -42,7 +42,7 @@ class HaqqWeb3UtilsRNModule(reactContext: ReactApplicationContext) :
         throw IllegalArgumentException("mnemonic_invalid")
       }
 
-      promise.resolve(mnemonic.seed())
+      promise.resolve(mnemonic.seed().toHex())
     } catch (_: IOException) {
 
     } catch (e: java.lang.IllegalArgumentException) {
@@ -56,7 +56,7 @@ class HaqqWeb3UtilsRNModule(reactContext: ReactApplicationContext) :
       val hdKey = HDKey(seed = seed)
       val child = hdKey.derive(path)
 
-      promise.resolve(child.privateKey())
+      promise.resolve("0x${child.privateKey().toHex()}")
     } catch (_: IOException) {
 
     } catch (e: java.lang.IllegalArgumentException) {
