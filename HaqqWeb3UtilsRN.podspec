@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,mm,swift}"
 
   s.dependency "React-Core"
-  s.dependency "CryptoSwift", "1.6.0"
+  s.dependency "CryptoSwift", "1.5.1"
   s.dependency "secp256k1Swift", "0.7.4"
   s.dependency "secp256k1Wrapper"
 

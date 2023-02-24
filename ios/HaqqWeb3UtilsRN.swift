@@ -3,6 +3,19 @@ import Foundation
 @objc(HaqqWeb3UtilsRN)
 class HaqqWeb3UtilsRN: NSObject {
     @objc
+    public func generateEntropy(_ strength: NSNumber, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
+        
+        do {
+          let strength =  Int(truncating: strength ?? 16)
+
+          let entropy = Mnemonic.generateEntropy(strength: strength)
+          resolve(Data(entropy).base64EncodedString())
+        } catch {
+          reject("0", "generateEntropy \(error)", nil)
+        }
+    }
+    
+    @objc
     public func generateMnemonic(_ strength: Optional<NSNumber>, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
       do {
         let strength =  Int(truncating: strength ?? 16)

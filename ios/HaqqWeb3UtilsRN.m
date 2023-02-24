@@ -3,6 +3,12 @@
 @interface RCT_EXTERN_MODULE(HaqqWeb3UtilsRN, NSObject)
 
 RCT_EXTERN_METHOD(
+                  generateEntropy: (NSNumber *) strength
+                  resolve: (RCTPromiseResolveBlock) resolve
+                  rejecter: (RCTPromiseRejectBlock) reject
+                  )
+
+RCT_EXTERN_METHOD(
                   generateMnemonic: (NSNumber *) strength
                   resolve: (RCTPromiseResolveBlock) resolve
                   rejecter: (RCTPromiseRejectBlock) reject

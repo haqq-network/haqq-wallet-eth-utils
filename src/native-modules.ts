@@ -18,6 +18,18 @@ const HaqqWeb3UtilsRN = NativeModules.HaqqWeb3UtilsRN
   );
 
 /**
+ * Generate entropy with strength
+ *
+ * @param {number} strength - Strength for entropy
+ * @returns - Promise resolving to stringifies data
+ */
+export function generateEntropy(
+  strength = 16
+): Promise<Buffer> {
+  return HaqqWeb3UtilsRN.generateEntropy(strength).then((resp: string) => new Buffer(resp, 'base64'));
+}
+
+/**
  * Generate mnemonic with strength
  *
  * @param {number} strength - Strength for mnemonic
@@ -43,7 +55,7 @@ export function derive(seed: string, path: string): Promise<string> {
  * @param {string} privateKey Private key
  */
 export function accountInfo(privateKey: string): Promise<{publicKey: string, address: string}> {
-  return HaqqWeb3UtilsRN.accountInfo(privateKey).then((r: string) => JSON.parse(r) );
+  return HaqqWeb3UtilsRN.accountInfo(privateKey).then((r: string) => JSON.parse(r));
 }
 
 /**

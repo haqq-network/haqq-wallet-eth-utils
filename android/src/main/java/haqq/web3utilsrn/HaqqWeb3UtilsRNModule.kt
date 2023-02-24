@@ -1,5 +1,6 @@
 package haqq.we3utilsrn
 
+import android.util.Base64
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
@@ -18,6 +19,18 @@ class HaqqWeb3UtilsRNModule(reactContext: ReactApplicationContext) :
 
   companion object {
     const val NAME = "HaqqWeb3UtilsRN"
+  }
+
+  @ReactMethod
+  fun generateEntropy(strength: Int, promise: Promise) {
+    try {
+      val entropy = Mnemonic.generateEntropy(strength = strength)
+
+      promise.resolve(Base64.encodeToString(entropy, Base64.NO_WRAP))
+
+    } catch (e: IOException) {
+      promise.reject("0", "generateEntropy")
+    }
   }
 
   @ReactMethod
