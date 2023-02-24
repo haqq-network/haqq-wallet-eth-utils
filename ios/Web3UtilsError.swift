@@ -9,6 +9,7 @@
 import Foundation
 
 public enum Web3UtilsError: Error {
+    case entropy_invalid;
     case mnemonic_invalid;
     case mnemonic_not_found;
     case private_key_not_found;

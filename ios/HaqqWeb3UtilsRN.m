@@ -9,6 +9,12 @@ RCT_EXTERN_METHOD(
                   )
 
 RCT_EXTERN_METHOD(
+                  generateMnemonicFromEntropy: (NSString *) entropy
+                  resolve: (RCTPromiseResolveBlock) resolve
+                  rejecter: (RCTPromiseRejectBlock) reject
+                  )
+
+RCT_EXTERN_METHOD(
                   generateMnemonic: (NSNumber *) strength
                   resolve: (RCTPromiseResolveBlock) resolve
                   rejecter: (RCTPromiseRejectBlock) reject

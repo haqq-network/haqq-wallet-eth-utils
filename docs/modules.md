@@ -10,6 +10,7 @@
 - [derive](modules.md#derive)
 - [generateEntropy](modules.md#generateentropy)
 - [generateMnemonic](modules.md#generatemnemonic)
+- [generateMnemonicFromEntropy](modules.md#generatemnemonicfromentropy)
 - [seedFromMnemonic](modules.md#seedfrommnemonic)
 - [sign](modules.md#sign)
 
@@ -33,7 +34,7 @@ Get account address and public key by privateKey
 
 #### Defined in
 
-[native-modules.ts:57](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/73986a6/src/native-modules.ts#L57)
+[native-modules.ts:79](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/cafd6a2/src/native-modules.ts#L79)
 
 ___
 
@@ -41,20 +42,24 @@ ___
 
 ▸ **derive**(`seed`, `path`): `Promise`<`string`\>
 
+Derive hd path for seed phrase
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `seed` | `string` |
-| `path` | `string` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `seed` | `string` | Seed phrase |
+| `path` | `string` | HD path |
 
 #### Returns
 
 `Promise`<`string`\>
 
+- Promise resolving to stringified data
+
 #### Defined in
 
-[native-modules.ts:49](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/73986a6/src/native-modules.ts#L49)
+[native-modules.ts:71](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/cafd6a2/src/native-modules.ts#L71)
 
 ___
 
@@ -78,7 +83,7 @@ Generate entropy with strength
 
 #### Defined in
 
-[native-modules.ts:26](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/73986a6/src/native-modules.ts#L26)
+[native-modules.ts:26](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/cafd6a2/src/native-modules.ts#L26)
 
 ___
 
@@ -102,7 +107,31 @@ Generate mnemonic with strength
 
 #### Defined in
 
-[native-modules.ts:38](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/73986a6/src/native-modules.ts#L38)
+[native-modules.ts:48](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/cafd6a2/src/native-modules.ts#L48)
+
+___
+
+### generateMnemonicFromEntropy
+
+▸ **generateMnemonicFromEntropy**(`entropy`): `Promise`<`string`\>
+
+Generate mnemonic from entropy
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `entropy` | `Buffer` | Entropy for mnemonic |
+
+#### Returns
+
+`Promise`<`string`\>
+
+- Promise resolving to stringifies data
+
+#### Defined in
+
+[native-modules.ts:38](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/cafd6a2/src/native-modules.ts#L38)
 
 ___
 
@@ -110,19 +139,23 @@ ___
 
 ▸ **seedFromMnemonic**(`mnemonicPhrase`): `Promise`<`string`\>
 
+Generate seed phrase from mnemonic string
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `mnemonicPhrase` | `string` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `mnemonicPhrase` | `string` | Mnemonic phrase |
 
 #### Returns
 
 `Promise`<`string`\>
 
+- Promise resolving to stringified data
+
 #### Defined in
 
-[native-modules.ts:45](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/73986a6/src/native-modules.ts#L45)
+[native-modules.ts:60](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/cafd6a2/src/native-modules.ts#L60)
 
 ___
 
@@ -149,4 +182,4 @@ Sign transaction
 
 #### Defined in
 
-[native-modules.ts:69](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/73986a6/src/native-modules.ts#L69)
+[native-modules.ts:91](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/cafd6a2/src/native-modules.ts#L91)

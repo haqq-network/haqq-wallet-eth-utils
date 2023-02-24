@@ -5,37 +5,57 @@
  * @format
  */
 
-import type {PropsWithChildren} from 'react';
 import React, {useCallback, useState} from 'react';
 import {
   Button,
   SafeAreaView,
   StatusBar,
-  StyleSheet,
   Text,
   useColorScheme,
-  View,
 } from 'react-native';
 
 import {Colors,} from 'react-native/Libraries/NewAppScreen';
-import {generateEntropy} from '@haqq/provider-web3-utils';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+import {
+  generateEntropy,
+  generateMnemonicFromEntropy,
+  seedFromMnemonic
+} from '@haqq/provider-web3-utils';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
-  const [entropy, setEntropy] = useState('')
+  const [entropy, setEntropy] = useState<null | Buffer>(null)
+  const [mnemonic, setMnemonic] = useState('')
+  const [seed, setSeed] = useState('')
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
   const onPressGenerateEntropy = useCallback(async () => {
-    const entropy = await generateEntropy(32);
-    setEntropy(JSON.stringify(entropy))
+    const ent = await generateEntropy(32);
+    setEntropy(ent)
   }, [])
+
+  const onPressGenerateMnemonicFromEntropy = useCallback(async () => {
+    try {
+      if (entropy) {
+        const mnemonicResult = await generateMnemonicFromEntropy(entropy);
+        setMnemonic(mnemonicResult)
+      }
+    } catch (e) {
+      if(e instanceof Error) {
+        // tslint:disable-next-line:no-console
+        console.log(e.message);
+      }
+    }
+  }, [])
+
+  const onPressGenerateSeed = useCallback(async () => {
+    if (mnemonic) {
+      const seedResult = await seedFromMnemonic(mnemonic);
+      setSeed(seedResult)
+    }
+  }, [mnemonic])
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -45,28 +65,15 @@ function App(): JSX.Element {
       />
 
       <Button title="Generate entropy" onPress={onPressGenerateEntropy} />
-      <Text>{entropy}</Text>
+      <Text>{entropy ? JSON.stringify(entropy) : null}</Text>
+      <Button title="Generate mnemonic for entropy" disabled={!entropy}
+              onPress={onPressGenerateMnemonicFromEntropy} />
+      <Text>{mnemonic}</Text>
+      <Button title="Generate seed from mnemonic" disabled={!mnemonic}
+              onPress={onPressGenerateSeed} />
+      <Text>{seed}</Text>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;

@@ -4,7 +4,7 @@ import Foundation
 class HaqqWeb3UtilsRN: NSObject {
     @objc
     public func generateEntropy(_ strength: NSNumber, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
-        
+
         do {
           let strength =  Int(truncating: strength ?? 16)
 
@@ -14,7 +14,26 @@ class HaqqWeb3UtilsRN: NSObject {
           reject("0", "generateEntropy \(error)", nil)
         }
     }
-    
+
+    @objc
+    public func generateMnemonicFromEntropy(_ entropy: String, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
+        do {
+            guard let entropy = Data(base64Encoded: entropy, options: .ignoreUnknownCharacters) else {
+                throw Web3UtilsError.entropy_invalid
+            }
+
+            let mnemonic = Mnemonic(bytes: entropy.bytes)
+
+            if !mnemonic.isValid {
+                throw Web3UtilsError.mnemonic_invalid
+            }
+
+            resolve(mnemonic.mnemonic.joined(separator: " "))
+        } catch {
+          reject("0", "generateMnemonicFromEntropy \(error)", nil)
+        }
+    }
+
     @objc
     public func generateMnemonic(_ strength: Optional<NSNumber>, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
       do {

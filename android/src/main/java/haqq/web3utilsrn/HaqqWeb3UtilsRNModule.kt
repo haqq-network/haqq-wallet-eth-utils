@@ -34,6 +34,18 @@ class HaqqWeb3UtilsRNModule(reactContext: ReactApplicationContext) :
   }
 
   @ReactMethod
+  fun generateMnemonicFromEntropy(entropy: String, promise: Promise) {
+    try {
+      val bytes = Base64.decode(entropy, Base64.DEFAULT)
+      val mnemonic = Mnemonic(bytes = bytes)
+
+      promise.resolve(mnemonic.mnemonic())
+    } catch (e: IOException) {
+      promise.reject("0", "generateMnemonicFromEntropy")
+    }
+  }
+
+  @ReactMethod
   fun generateMnemonic(strength: Int, promise: Promise) {
     try {
       val bytes = Mnemonic.generateEntropy(strength = strength)

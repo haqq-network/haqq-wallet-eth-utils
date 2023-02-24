@@ -30,6 +30,16 @@ export function generateEntropy(
 }
 
 /**
+ * Generate mnemonic from entropy
+ *
+ * @param {Buffer} entropy - Entropy for mnemonic
+ * @returns - Promise resolving to stringifies data
+ */
+export function generateMnemonicFromEntropy(entropy: Buffer): Promise<string> {
+  return HaqqWeb3UtilsRN.generateMnemonicFromEntropy(entropy.toString('base64'))
+}
+
+/**
  * Generate mnemonic with strength
  *
  * @param {number} strength - Strength for mnemonic
@@ -41,11 +51,23 @@ export function generateMnemonic(
   return HaqqWeb3UtilsRN.generateMnemonic(strength);
 }
 
-
+/**
+ * Generate seed phrase from mnemonic string
+ *
+ * @param {string} mnemonicPhrase - Mnemonic phrase
+ * @returns - Promise resolving to stringified data
+ */
 export function seedFromMnemonic(mnemonicPhrase: string): Promise<string> {
   return HaqqWeb3UtilsRN.seedFromMnemonic(mnemonicPhrase);
 }
 
+/**
+ * Derive hd path for seed phrase
+ *
+ * @param {string} seed - Seed phrase
+ * @param {string} path - HD path
+ * @returns - Promise resolving to stringified data
+ */
 export function derive(seed: string, path: string): Promise<string> {
   return HaqqWeb3UtilsRN.derive(seed, path);
 }
