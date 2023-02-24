@@ -1,6 +1,6 @@
-[@haqq/provider-web3-utils - v0.0.7](README.md) / Exports
+[@haqq/provider-web3-utils - v0.0.8](README.md) / Exports
 
-# @haqq/provider-web3-utils - v0.0.7
+# @haqq/provider-web3-utils - v0.0.8
 
 ## Table of contents
 
@@ -34,7 +34,7 @@ Get account address and public key by privateKey
 
 #### Defined in
 
-[native-modules.ts:79](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/cafd6a2/src/native-modules.ts#L79)
+[native-modules.ts:79](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/dbefce4/src/native-modules.ts#L79)
 
 ___
 
@@ -59,7 +59,7 @@ Derive hd path for seed phrase
 
 #### Defined in
 
-[native-modules.ts:71](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/cafd6a2/src/native-modules.ts#L71)
+[native-modules.ts:71](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/dbefce4/src/native-modules.ts#L71)
 
 ___
 
@@ -83,7 +83,7 @@ Generate entropy with strength
 
 #### Defined in
 
-[native-modules.ts:26](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/cafd6a2/src/native-modules.ts#L26)
+[native-modules.ts:26](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/dbefce4/src/native-modules.ts#L26)
 
 ___
 
@@ -107,7 +107,7 @@ Generate mnemonic with strength
 
 #### Defined in
 
-[native-modules.ts:48](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/cafd6a2/src/native-modules.ts#L48)
+[native-modules.ts:48](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/dbefce4/src/native-modules.ts#L48)
 
 ___
 
@@ -131,7 +131,7 @@ Generate mnemonic from entropy
 
 #### Defined in
 
-[native-modules.ts:38](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/cafd6a2/src/native-modules.ts#L38)
+[native-modules.ts:38](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/dbefce4/src/native-modules.ts#L38)
 
 ___
 
@@ -155,7 +155,7 @@ Generate seed phrase from mnemonic string
 
 #### Defined in
 
-[native-modules.ts:60](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/cafd6a2/src/native-modules.ts#L60)
+[native-modules.ts:60](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/dbefce4/src/native-modules.ts#L60)
 
 ___
 
@@ -182,4 +182,4 @@ Sign transaction
 
 #### Defined in
 
-[native-modules.ts:91](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/cafd6a2/src/native-modules.ts#L91)
+[native-modules.ts:91](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/dbefce4/src/native-modules.ts#L91)
