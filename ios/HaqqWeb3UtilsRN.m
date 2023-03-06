@@ -45,6 +45,12 @@ RCT_EXTERN_METHOD(
                 rejecter: (RCTPromiseRejectBlock) reject
                 )
 
+RCT_EXTERN_METHOD(
+                hashMessage: (NSString *) message
+                resolve: (RCTPromiseResolveBlock) resolve
+                rejecter: (RCTPromiseRejectBlock) reject
+                )
+
 + (BOOL)requiresMainQueueSetup
 {
   return NO;

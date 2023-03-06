@@ -91,3 +91,15 @@ export function accountInfo(privateKey: string): Promise<{publicKey: string, add
 export function sign(privateKey: string, message: string): Promise<string> {
   return HaqqWeb3UtilsRN.sign(privateKey, message);
 }
+
+
+/**
+ * Hash message
+ *
+ * @returns - Promise resolving to stringified data
+ * @param {string} message message for signing
+ * @returns - Promise resolving to stringified data
+ */
+export function hashMessage(message: string): Promise<string> {
+  return HaqqWeb3UtilsRN.hashMessage(message);
+}

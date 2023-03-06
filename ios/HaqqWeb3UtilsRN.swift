@@ -1,4 +1,5 @@
 import Foundation
+import CryptoSwift
 
 @objc(HaqqWeb3UtilsRN)
 class HaqqWeb3UtilsRN: NSObject {
@@ -134,5 +135,15 @@ class HaqqWeb3UtilsRN: NSObject {
       } catch {
         reject("0", "sign \(error)", nil)
       }
+    }
+    
+    @objc
+    public func hashMessage(_ message: String, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock)-> Void {
+        do {
+            let hash = Digest.sha3(Array(hex: message), variant: .keccak256)
+            resolve(Data(hash).toHexString())
+        } catch {
+            reject("0", "hashMessage \(error)", nil)
+        }
     }
 }

@@ -9,6 +9,8 @@ import haqq.web3utilsrn.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.IOException
+import org.komputing.khash.keccak.Keccak
+import org.komputing.khash.keccak.KeccakParameter
 
 class HaqqWeb3UtilsRNModule(reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
@@ -125,6 +127,17 @@ class HaqqWeb3UtilsRNModule(reactContext: ReactApplicationContext) :
       promise.resolve(resp.toHex());
     } catch (_: IOException) {
 
+    } catch (e: java.lang.IllegalArgumentException) {
+      promise.reject("0", e)
+    }
+  }
+
+  @ReactMethod
+  fun hashMessage(message: String, promise: Promise) {
+    try {
+      val hash = Keccak.digest( message.decodeHex(), KeccakParameter.KECCAK_256)
+
+      promise.resolve(hash.toHex());
     } catch (e: java.lang.IllegalArgumentException) {
       promise.reject("0", e)
     }

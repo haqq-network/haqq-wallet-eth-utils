@@ -11,6 +11,7 @@ import {
   SafeAreaView,
   StatusBar,
   Text,
+  TextInput,
   useColorScheme,
 } from 'react-native';
 
@@ -18,6 +19,7 @@ import {Colors,} from 'react-native/Libraries/NewAppScreen';
 import {
   generateEntropy,
   generateMnemonicFromEntropy,
+  hashMessage,
   seedFromMnemonic
 } from '@haqq/provider-web3-utils';
 
@@ -26,7 +28,8 @@ function App(): JSX.Element {
   const [entropy, setEntropy] = useState<null | Buffer>(null)
   const [mnemonic, setMnemonic] = useState('')
   const [seed, setSeed] = useState('')
-
+  const [message, setMessage] = useState('')
+  const [hashedMessage, setHashedMessage] = useState('')
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
@@ -43,7 +46,7 @@ function App(): JSX.Element {
         setMnemonic(mnemonicResult)
       }
     } catch (e) {
-      if(e instanceof Error) {
+      if (e instanceof Error) {
         // tslint:disable-next-line:no-console
         console.log(e.message);
       }
@@ -56,6 +59,11 @@ function App(): JSX.Element {
       setSeed(seedResult)
     }
   }, [mnemonic])
+
+  const onPressHashMessage = useCallback(async () => {
+    const text = await hashMessage(message);
+    setHashedMessage(text);
+  }, [])
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -72,6 +80,11 @@ function App(): JSX.Element {
       <Button title="Generate seed from mnemonic" disabled={!mnemonic}
               onPress={onPressGenerateSeed} />
       <Text>{seed}</Text>
+      <TextInput onChangeText={(text) => setMessage(text)} value={message} />
+      <Button title="Hash message"
+              onPress={onPressHashMessage} />
+
+      <Text>{hashedMessage}</Text>
     </SafeAreaView>
   );
 }
