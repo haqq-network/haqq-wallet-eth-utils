@@ -76,7 +76,11 @@ export function derive(seed: string, path: string): Promise<string> {
  * Get account address and public key by privateKey
  * @param {string} privateKey Private key
  */
-export function accountInfo(privateKey: string): Promise<{publicKey: string, address: string}> {
+export function accountInfo(privateKey: string): Promise<{
+  publicKey: string,
+  address: string,
+  publicKeyUncompressed: string
+}> {
   return HaqqWeb3UtilsRN.accountInfo(privateKey).then((r: string) => JSON.parse(r));
 }
 

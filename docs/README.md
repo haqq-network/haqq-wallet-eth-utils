@@ -1,4 +1,4 @@
-@haqq/provider-web3-utils - v0.0.9 / [Exports](modules.md)
+@haqq/provider-web3-utils - v0.0.10 / [Exports](modules.md)
 
 # Encryption service in RN
 

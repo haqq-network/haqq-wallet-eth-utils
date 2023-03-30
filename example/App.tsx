@@ -17,6 +17,8 @@ import {
 
 import {Colors,} from 'react-native/Libraries/NewAppScreen';
 import {
+  accountInfo,
+  derive,
   generateEntropy,
   generateMnemonicFromEntropy,
   hashMessage,
@@ -30,6 +32,8 @@ function App(): JSX.Element {
   const [seed, setSeed] = useState('')
   const [message, setMessage] = useState('')
   const [hashedMessage, setHashedMessage] = useState('')
+  const [privateKey, setPrivateKey] = useState('')
+  const [info, setInfo] = useState<null | object>(null)
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
@@ -51,7 +55,7 @@ function App(): JSX.Element {
         console.log(e.message);
       }
     }
-  }, [])
+  }, [entropy])
 
   const onPressGenerateSeed = useCallback(async () => {
     if (mnemonic) {
@@ -59,6 +63,20 @@ function App(): JSX.Element {
       setSeed(seedResult)
     }
   }, [mnemonic])
+
+  const onPressDerive = useCallback(async () => {
+    if (seed) {
+      const privateKeyResult = await derive(seed, 'm/44\'/60\'/0\'/0/0');
+      setPrivateKey(privateKeyResult)
+    }
+  }, [seed])
+
+  const onPressAccountInfo = useCallback(async () => {
+    if (privateKey) {
+      const infoResult = await accountInfo(privateKey);
+      setInfo(infoResult)
+    }
+  }, [privateKey])
 
   const onPressHashMessage = useCallback(async () => {
     const text = await hashMessage(message);
@@ -80,6 +98,12 @@ function App(): JSX.Element {
       <Button title="Generate seed from mnemonic" disabled={!mnemonic}
               onPress={onPressGenerateSeed} />
       <Text>{seed}</Text>
+      <Button title="Derive" disabled={!seed}
+              onPress={onPressDerive} />
+      <Text>{privateKey}</Text>
+      <Button title="Account info" disabled={!privateKey}
+              onPress={onPressAccountInfo} />
+      <Text>{info ? JSON.stringify(info) : null}</Text>
       <TextInput onChangeText={(text) => setMessage(text)} value={message} />
       <Button title="Hash message"
               onPress={onPressHashMessage} />
