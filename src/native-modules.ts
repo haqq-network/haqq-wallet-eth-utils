@@ -2,20 +2,20 @@ import {NativeModules, Platform} from 'react-native';
 
 const LINKING_ERROR =
   `The package '@haqq/provider-web3-utils' doesn't seem to be linked. Make sure: \n\n` +
-  Platform.select({ios: '- You have run \'pod install\'\n', default: ''}) +
+  Platform.select({ios: "- You have run 'pod install'\n", default: ''}) +
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
 
 const HaqqWeb3UtilsRN = NativeModules.HaqqWeb3UtilsRN
   ? NativeModules.HaqqWeb3UtilsRN
   : new Proxy(
-    {},
-    {
-      get() {
-        throw new Error(LINKING_ERROR);
+      {},
+      {
+        get() {
+          throw new Error(LINKING_ERROR);
+        },
       },
-    }
-  );
+    );
 
 /**
  * Generate entropy with strength
@@ -23,10 +23,10 @@ const HaqqWeb3UtilsRN = NativeModules.HaqqWeb3UtilsRN
  * @param {number} strength - Strength for entropy
  * @returns - Promise resolving to stringifies data
  */
-export function generateEntropy(
-  strength = 16
-): Promise<Buffer> {
-  return HaqqWeb3UtilsRN.generateEntropy(strength).then((resp: string) => new Buffer(resp, 'base64'));
+export function generateEntropy(strength = 16): Promise<Buffer> {
+  return HaqqWeb3UtilsRN.generateEntropy(strength).then(
+    (resp: string) => new Buffer(resp, 'base64'),
+  );
 }
 
 /**
@@ -36,7 +36,9 @@ export function generateEntropy(
  * @returns - Promise resolving to stringifies data
  */
 export function generateMnemonicFromEntropy(entropy: Buffer): Promise<string> {
-  return HaqqWeb3UtilsRN.generateMnemonicFromEntropy(entropy.toString('base64'))
+  return HaqqWeb3UtilsRN.generateMnemonicFromEntropy(
+    entropy.toString('base64'),
+  );
 }
 
 /**
@@ -45,9 +47,7 @@ export function generateMnemonicFromEntropy(entropy: Buffer): Promise<string> {
  * @param {number} strength - Strength for mnemonic
  * @returns - Promise resolving to stringified data
  */
-export function generateMnemonic(
-  strength = 16
-): Promise<string> {
+export function generateMnemonic(strength = 16): Promise<string> {
   return HaqqWeb3UtilsRN.generateMnemonic(strength);
 }
 
@@ -77,11 +77,13 @@ export function derive(seed: string, path: string): Promise<string> {
  * @param {string} privateKey Private key
  */
 export function accountInfo(privateKey: string): Promise<{
-  publicKey: string,
-  address: string,
-  publicKeyUncompressed: string
+  publicKey: string;
+  address: string;
+  publicKeyUncompressed: string;
 }> {
-  return HaqqWeb3UtilsRN.accountInfo(privateKey).then((r: string) => JSON.parse(r));
+  return HaqqWeb3UtilsRN.accountInfo(privateKey).then((r: string) =>
+    JSON.parse(r),
+  );
 }
 
 /**
@@ -95,7 +97,6 @@ export function accountInfo(privateKey: string): Promise<{
 export function sign(privateKey: string, message: string): Promise<string> {
   return HaqqWeb3UtilsRN.sign(privateKey, message);
 }
-
 
 /**
  * Hash message
