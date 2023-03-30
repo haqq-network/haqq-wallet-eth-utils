@@ -106,7 +106,8 @@ class HaqqWeb3UtilsRN: NSObject {
 
             let resp = AccountInfoResponse(
               address: "0x\(Data(wallet.address).toHexString())",
-              publicKey: "0x\(Data(wallet.publicKey).toHexString())"
+              publicKey: "0x\(Data(wallet.publicKey).toHexString())",
+              publicKeyUncompressed: "0x\(Data(wallet.publicKeyUncompressed).toHexString())"
             )
 
             let json = try! resp.toJSON()
@@ -136,7 +137,7 @@ class HaqqWeb3UtilsRN: NSObject {
         reject("0", "sign \(error)", nil)
       }
     }
-    
+
     @objc
     public func hashMessage(_ message: String, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock)-> Void {
         do {

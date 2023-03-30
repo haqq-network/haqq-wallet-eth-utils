@@ -50,6 +50,10 @@ class Wallet {
     return _privateKey
   }
 
+  fun publicKeyUncompressed(): ByteArray {
+    return Secp256k1.pubkeyCreate(_privateKey)
+  }
+
   fun publicKey(): ByteArray {
     return Secp256k1.pubKeyCompress(Secp256k1.pubkeyCreate(_privateKey))
   }

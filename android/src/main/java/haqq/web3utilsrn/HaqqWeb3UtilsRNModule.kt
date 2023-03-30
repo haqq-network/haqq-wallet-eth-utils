@@ -99,7 +99,8 @@ class HaqqWeb3UtilsRNModule(reactContext: ReactApplicationContext) :
       val result = Json.encodeToString(
         AccountInfoResponse(
           address = "0x${wallet.address().toHex()}",
-          publicKey = "0x${wallet.publicKey().toHex()}"
+          publicKey = "0x${wallet.publicKey().toHex()}",
+          publicKeyUncompressed = "0x${wallet.publicKeyUncompressed().toHex()}"
         )
       )
 
