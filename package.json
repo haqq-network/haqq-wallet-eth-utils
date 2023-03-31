@@ -1,6 +1,6 @@
 {
   "name": "@haqq/provider-web3-utils",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Web3 utils for react-native",
   "main": "dist/index.js",
   "repository": "https://github.com/haqq-network/haqq-wallet-provider-web3-utils",
