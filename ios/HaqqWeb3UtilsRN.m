@@ -3,50 +3,50 @@
 @interface RCT_EXTERN_MODULE(HaqqWeb3UtilsRN, NSObject)
 
 RCT_EXTERN_METHOD(
-                  generateEntropy: (NSNumber *) strength
+                  generateEntropy: (nonnull NSNumber) strength
                   resolve: (RCTPromiseResolveBlock) resolve
                   rejecter: (RCTPromiseRejectBlock) reject
                   )
 
 RCT_EXTERN_METHOD(
-                  generateMnemonicFromEntropy: (NSString *) entropy
+                  generateMnemonicFromEntropy: (nonnull NSString) entropy
                   resolve: (RCTPromiseResolveBlock) resolve
                   rejecter: (RCTPromiseRejectBlock) reject
                   )
 
 RCT_EXTERN_METHOD(
-                  generateMnemonic: (NSNumber *) strength
+                  generateMnemonic: (nonnull NSNumber) strength
                   resolve: (RCTPromiseResolveBlock) resolve
                   rejecter: (RCTPromiseRejectBlock) reject
                   )
 
 RCT_EXTERN_METHOD(
-                  seedFromMnemonic: (NSString *) mnemonicPhrase
+                  seedFromMnemonic: (nonnull NSString) mnemonicPhrase
                   resolve: (RCTPromiseResolveBlock) resolve
                   rejecter: (RCTPromiseRejectBlock) reject
                   )
 
 RCT_EXTERN_METHOD(
-                  derive: (NSString *) seed
-                  path: (NSString *) path
+                  derive: (nonnull NSString) seed
+                  path: (nonnull NSString) path
                   resolve: (RCTPromiseResolveBlock) resolve
                   rejecter: (RCTPromiseRejectBlock) reject
                   )
 RCT_EXTERN_METHOD(
-                  accountInfo: (NSString *) privatekey
+                  accountInfo: (nonnull NSString) privatekey
                   resolve: (RCTPromiseResolveBlock) resolve
                   rejecter: (RCTPromiseRejectBlock) reject
                   )
 
 RCT_EXTERN_METHOD(
-                sign: (NSString *) privateKey
-                message: (NSString *) message
+                sign: (nonnull NSString) privateKey
+                message: (nonnull NSString) message
                 resolve: (RCTPromiseResolveBlock) resolve
                 rejecter: (RCTPromiseRejectBlock) reject
                 )
 
 RCT_EXTERN_METHOD(
-                hashMessage: (NSString *) message
+                hashMessage: (nonnull NSString) message
                 resolve: (RCTPromiseResolveBlock) resolve
                 rejecter: (RCTPromiseRejectBlock) reject
                 )

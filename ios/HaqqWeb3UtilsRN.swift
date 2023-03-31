@@ -36,7 +36,7 @@ class HaqqWeb3UtilsRN: NSObject {
     }
 
     @objc
-    public func generateMnemonic(_ strength: Optional<NSNumber>, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
+    public func generateMnemonic(_ strength: NSNumber, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
       do {
         let strength =  Int(truncating: strength ?? 16)
 
@@ -53,12 +53,8 @@ class HaqqWeb3UtilsRN: NSObject {
     }
 
     @objc
-    public func seedFromMnemonic(_ mnemonicPhrase: Optional<String>, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
+    public func seedFromMnemonic(_ mnemonicPhrase: String, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
         do {
-            guard let mnemonicPhrase = mnemonicPhrase else {
-              throw Web3UtilsError.mnemonic_not_found;
-            }
-
             let mnemonic = Mnemonic(phrase: mnemonicPhrase, pass: "")
 
             if !mnemonic.isValid {
@@ -71,16 +67,8 @@ class HaqqWeb3UtilsRN: NSObject {
     }
 
     @objc
-    public func derive(_ seed: Optional<String>, path: Optional<String>, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
+    public func derive(_ seed: String, path: String, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
         do {
-            guard let seed = seed else {
-              throw Web3UtilsError.hdkey_seed
-            }
-
-            guard let path = path else {
-                throw Web3UtilsError.hdkey_path
-            }
-
             guard let hdkey = try? HDKey(seed: Array(hex: seed)) else {
                 throw Web3UtilsError.hdkey_init
             }
@@ -96,12 +84,8 @@ class HaqqWeb3UtilsRN: NSObject {
     }
 
     @objc
-    public func accountInfo(_ privateKey: Optional<String>, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
+    public func accountInfo(_ privateKey: String, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
         do {
-            guard let privateKey = privateKey else {
-              throw Web3UtilsError.private_key_not_found;
-            }
-
             let wallet = Wallet(privateKey: privateKey)
 
             let resp = AccountInfoResponse(
@@ -118,16 +102,8 @@ class HaqqWeb3UtilsRN: NSObject {
     }
 
     @objc
-    public func sign(_ privateKey: Optional<String>, message: Optional<String>, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock)-> Void {
+    public func sign(_ privateKey: String, message: String, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock)-> Void {
       do {
-        guard let privateKey = privateKey else {
-          throw Web3UtilsError.private_key_not_found;
-        }
-
-        guard let message = message else {
-          throw Web3UtilsError.message_not_found;
-        }
-
         let wallet = Wallet(privateKey: privateKey)
 
         let sig = try wallet.sign(Array(hex: message))
