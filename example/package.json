@@ -9,10 +9,10 @@
     "start": "react-native start"
   },
   "dependencies": {
-    "@haqq/provider-web3-utils": "file:../",
+    "@haqq/provider-web3-utils": "file:..",
     "buffer": "^6.0.3",
     "react": "18.2.0",
-    "react-native": "0.71.5"
+    "react-native": "0.71.7"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

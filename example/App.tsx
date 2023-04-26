@@ -81,7 +81,7 @@ function App(): JSX.Element {
   const onPressHashMessage = useCallback(async () => {
     const text = await hashMessage(message);
     setHashedMessage(text);
-  }, [])
+  }, [message])
 
   return (
     <SafeAreaView style={backgroundStyle}>
