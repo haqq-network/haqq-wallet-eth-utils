@@ -136,7 +136,7 @@ class HaqqWeb3UtilsRNModule(reactContext: ReactApplicationContext) :
   @ReactMethod
   fun hashMessage(message: String, promise: Promise) {
     try {
-      val hash = Keccak.digest( message.decodeHex(), KeccakParameter.KECCAK_256)
+      val hash = Keccak.digest(message.toByteArray(), KeccakParameter.KECCAK_256)
 
       promise.resolve(hash.toHex());
     } catch (e: java.lang.IllegalArgumentException) {

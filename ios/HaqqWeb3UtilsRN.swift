@@ -117,7 +117,7 @@ class HaqqWeb3UtilsRN: NSObject {
     @objc
     public func hashMessage(_ message: String, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock)-> Void {
         do {
-            let hash = Digest.sha3(Array(hex: message), variant: .keccak256)
+            let hash = Digest.sha3(message.bytes, variant: .keccak256)
             resolve(Data(hash).toHexString())
         } catch {
             reject("0", "hashMessage \(error)", nil)
