@@ -67,6 +67,10 @@ public class Wallet {
     self.privateKey = Array(key[0..<32])
   }
 
+  public func clean() {
+    privateKey = [UInt8](count: 32, repeatedValue: 0x0)
+  }
+    
   public func sign(_ message: [UInt8]) throws -> [UInt8] {
     let hash = Digest.sha3(message, variant: .keccak256)
 

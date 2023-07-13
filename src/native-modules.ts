@@ -9,13 +9,13 @@ const LINKING_ERROR =
 const HaqqWeb3UtilsRN = NativeModules.HaqqWeb3UtilsRN
   ? NativeModules.HaqqWeb3UtilsRN
   : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
+    {},
+    {
+      get() {
+        throw new Error(LINKING_ERROR);
       },
-    );
+    },
+  );
 
 /**
  * Generate entropy with strength
@@ -59,6 +59,16 @@ export function generateMnemonic(strength = 16): Promise<string> {
  */
 export function seedFromMnemonic(mnemonicPhrase: string): Promise<string> {
   return HaqqWeb3UtilsRN.seedFromMnemonic(mnemonicPhrase);
+}
+
+/**
+ * Generate seed phrase from entropy
+ *
+ * @returns - Promise resolving to stringified data
+ * @param {Buffer} entropy - Entropy for seed phrase
+ */
+export function seedFromEntropy(entropy: Buffer): Promise<string> {
+  return HaqqWeb3UtilsRN.seedFromEntropy(entropy.toString('base64'));
 }
 
 /**

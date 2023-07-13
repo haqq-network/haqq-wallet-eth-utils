@@ -50,6 +50,12 @@ public class HDKey {
     self.privateKey = Array(key[0..<32])
     self.chainCode = Array(key[32..<64])
   }
+    
+  public func clean() {
+      privateKey = [UInt8](count: 32, repeatedValue: 0x0)
+      chainCode = [UInt8](count: 32, repeatedValue: 0x0)
+  }
+      
   
   public func derive(path: String) -> HDKey? {
     let segments = path.components(separatedBy: "/")

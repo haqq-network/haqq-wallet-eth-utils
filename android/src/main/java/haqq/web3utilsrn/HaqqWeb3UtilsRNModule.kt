@@ -42,6 +42,7 @@ class HaqqWeb3UtilsRNModule(reactContext: ReactApplicationContext) :
       val mnemonic = Mnemonic(bytes = bytes)
 
       promise.resolve(mnemonic.mnemonic())
+      mnemonic.clean()
     } catch (e: IOException) {
       promise.reject("0", "generateMnemonicFromEntropy")
     }
@@ -54,7 +55,7 @@ class HaqqWeb3UtilsRNModule(reactContext: ReactApplicationContext) :
       val mnemonic = Mnemonic(bytes = bytes)
 
       promise.resolve(mnemonic.mnemonic())
-
+      mnemonic.clean()
     } catch (e: IOException) {
       promise.reject("0", "generateMnemonic")
     }
@@ -70,6 +71,28 @@ class HaqqWeb3UtilsRNModule(reactContext: ReactApplicationContext) :
       }
 
       promise.resolve(mnemonic.seed())
+
+      mnemonic.clean()
+    } catch (_: IOException) {
+
+    } catch (e: java.lang.IllegalArgumentException) {
+      promise.reject("0", e)
+    }
+  }
+
+
+  @ReactMethod
+  fun seedFromEntropy(entropy: String, promise: Promise) {
+    try {
+      val bytes = Base64.decode(entropy, Base64.DEFAULT)
+      val mnemonic = Mnemonic(bytes = bytes)
+
+      if (!mnemonic.isValid()) {
+        throw IllegalArgumentException("mnemonic_invalid")
+      }
+
+      promise.resolve(mnemonic.seed())
+      mnemonic.clean()
     } catch (_: IOException) {
 
     } catch (e: java.lang.IllegalArgumentException) {
@@ -84,6 +107,8 @@ class HaqqWeb3UtilsRNModule(reactContext: ReactApplicationContext) :
       val child = hdKey.derive(path)
 
       promise.resolve("0x${child.privateKey().toHex()}")
+      hdKey.clean()
+      child.clean()
     } catch (_: IOException) {
 
     } catch (e: java.lang.IllegalArgumentException) {
@@ -105,6 +130,8 @@ class HaqqWeb3UtilsRNModule(reactContext: ReactApplicationContext) :
       )
 
       promise.resolve(result)
+
+      wallet.clean()
     } catch (_: IOException) {
 
     } catch (e: java.lang.IllegalArgumentException) {
@@ -126,6 +153,7 @@ class HaqqWeb3UtilsRNModule(reactContext: ReactApplicationContext) :
       val resp = wallet.sign(msg.decodeHex())
 
       promise.resolve(resp.toHex());
+      wallet.clean()
     } catch (_: IOException) {
 
     } catch (e: java.lang.IllegalArgumentException) {

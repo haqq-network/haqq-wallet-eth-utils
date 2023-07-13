@@ -30,6 +30,8 @@ class HaqqWeb3UtilsRN: NSObject {
             }
 
             resolve(mnemonic.mnemonic.joined(separator: " "))
+            
+            mnemonic.clean()
         } catch {
           reject("0", "generateMnemonicFromEntropy \(error)", nil)
         }
@@ -47,6 +49,8 @@ class HaqqWeb3UtilsRN: NSObject {
         }
 
         resolve(mnemonic.mnemonic.joined(separator: " "))
+          
+          mnemonic.clean()
       } catch {
         reject("0", "generateMnemonic \(error)", nil)
       }
@@ -61,11 +65,33 @@ class HaqqWeb3UtilsRN: NSObject {
               throw Web3UtilsError.mnemonic_invalid
             }
             resolve(Data(mnemonic.seed).toHexString())
+            
+            mnemonic.clean()
         } catch {
             reject("0", "seedFromMnemonic \(error)", nil)
         }
     }
 
+    @objc
+    public func seedFromEntropy(_ entropy: String, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
+        do {
+            guard let entropy = Data(base64Encoded: entropy, options: .ignoreUnknownCharacters) else {
+                throw Web3UtilsError.entropy_invalid
+            }
+
+            let mnemonic = Mnemonic(bytes: entropy.bytes)
+
+            if !mnemonic.isValid {
+              throw Web3UtilsError.mnemonic_invalid
+            }
+            resolve(Data(mnemonic.seed).toHexString())
+            
+            mnemonic.clean()
+        } catch {
+            reject("0", "seedFromEntropy \(error)", nil)
+        }
+    }
+    
     @objc
     public func derive(_ seed: String, path: String, resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
         do {
@@ -78,6 +104,9 @@ class HaqqWeb3UtilsRN: NSObject {
             }
 
             resolve("0x\(Data(child.privateKey).toHexString())")
+            
+            hdkey.clean()
+            child.clean()
         } catch {
             reject("0", "derive \(error)", nil)
         }
@@ -96,6 +125,8 @@ class HaqqWeb3UtilsRN: NSObject {
 
             let json = try! resp.toJSON()
             resolve(json)
+            
+            wallet.clean()
         } catch {
           reject("0", "sign \(error)", nil)
         }
@@ -109,6 +140,8 @@ class HaqqWeb3UtilsRN: NSObject {
         let sig = try wallet.sign(Array(hex: message))
 
         resolve(Data(sig).toHexString())
+          
+          wallet.clean()
       } catch {
         reject("0", "sign \(error)", nil)
       }

@@ -27,6 +27,12 @@ RCT_EXTERN_METHOD(
                   )
 
 RCT_EXTERN_METHOD(
+                  seedFromEntropy: (nonnull NSString) entropy
+                  resolve: (RCTPromiseResolveBlock) resolve
+                  rejecter: (RCTPromiseRejectBlock) reject
+                  )
+
+RCT_EXTERN_METHOD(
                   derive: (nonnull NSString) seed
                   path: (nonnull NSString) path
                   resolve: (RCTPromiseResolveBlock) resolve

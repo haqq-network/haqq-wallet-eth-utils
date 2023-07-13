@@ -6,15 +6,8 @@
  */
 
 import React, {useCallback, useState} from 'react';
-import {
-  Button,
-  SafeAreaView,
-  StatusBar,
-  Text,
-  TextInput,
-  useColorScheme,
-} from 'react-native';
-
+import {Button, SafeAreaView, StatusBar, Text, TextInput, useColorScheme,} from 'react-native';
+import Clipboard from '@react-native-clipboard/clipboard';
 import {Colors,} from 'react-native/Libraries/NewAppScreen';
 import {
   accountInfo,
@@ -22,12 +15,14 @@ import {
   generateEntropy,
   generateMnemonicFromEntropy,
   hashMessage,
+  seedFromEntropy,
   seedFromMnemonic
 } from '@haqq/provider-web3-utils';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   const [entropy, setEntropy] = useState<null | Buffer>(null)
+  const [entropyInput, setEntropyInput] = useState<string>("")
   const [mnemonic, setMnemonic] = useState('')
   const [seed, setSeed] = useState('')
   const [message, setMessage] = useState('')
@@ -43,6 +38,10 @@ function App(): JSX.Element {
     setEntropy(ent)
   }, [])
 
+  const onPressUseEntropy = useCallback(() => {
+    setEntropy(Buffer.from(entropyInput, 'hex'))
+  }, [entropyInput])
+
   const onPressGenerateMnemonicFromEntropy = useCallback(async () => {
     try {
       if (entropy) {
@@ -50,6 +49,32 @@ function App(): JSX.Element {
         setMnemonic(mnemonicResult)
       }
     } catch (e) {
+      if (e instanceof Error) {
+        // tslint:disable-next-line:no-console
+        console.log(e.message);
+      }
+    }
+  }, [entropy])
+
+  const onPressCopyEntropy = useCallback(async () => {
+    if (entropy) {
+      Clipboard.setString(entropy.toString('hex'));
+    }
+  }, [entropy])
+
+  const onPressCopyMnemonic = useCallback(() => {
+    Clipboard.setString(mnemonic);
+  }, [mnemonic])
+
+  const onPressGenerateSeedFromEntropy = useCallback(async () => {
+    try {
+      if (entropy) {
+        const seedPhrase = await seedFromEntropy(entropy);
+        console.log('seedPhrase', seedPhrase)
+        setSeed(seedPhrase)
+      }
+    } catch (e) {
+      console.log('e', e)
       if (e instanceof Error) {
         // tslint:disable-next-line:no-console
         console.log(e.message);
@@ -89,24 +114,30 @@ function App(): JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-
-      <Button title="Generate entropy" onPress={onPressGenerateEntropy} />
-      <Text>{entropy ? JSON.stringify(entropy) : null}</Text>
+      <TextInput onChangeText={(text) => setEntropyInput(text)} value={entropyInput}/>
+      {entropyInput.length === 0 ? (
+        <Button title="Generate entropy" onPress={onPressGenerateEntropy}/>
+      ) : (
+        <Button title="Use entropy" onPress={onPressUseEntropy}/>
+      )}
+      <Text onPress={onPressCopyEntropy}>{entropy ? entropy.toString('hex') : null}</Text>
       <Button title="Generate mnemonic for entropy" disabled={!entropy}
-              onPress={onPressGenerateMnemonicFromEntropy} />
-      <Text>{mnemonic}</Text>
+              onPress={onPressGenerateMnemonicFromEntropy}/>
+      <Text onPress={onPressCopyMnemonic}>{mnemonic}</Text>
       <Button title="Generate seed from mnemonic" disabled={!mnemonic}
-              onPress={onPressGenerateSeed} />
+              onPress={onPressGenerateSeed}/>
+      <Button title="Generate seed from entropy" disabled={!entropy}
+              onPress={onPressGenerateSeedFromEntropy}/>
       <Text>{seed}</Text>
       <Button title="Derive" disabled={!seed}
-              onPress={onPressDerive} />
+              onPress={onPressDerive}/>
       <Text>{privateKey}</Text>
       <Button title="Account info" disabled={!privateKey}
-              onPress={onPressAccountInfo} />
+              onPress={onPressAccountInfo}/>
       <Text>{info ? JSON.stringify(info) : null}</Text>
-      <TextInput onChangeText={(text) => setMessage(text)} value={message} />
+      <TextInput onChangeText={(text) => setMessage(text)} value={message}/>
       <Button title="Hash message"
-              onPress={onPressHashMessage} />
+              onPress={onPressHashMessage}/>
 
       <Text>{hashedMessage}</Text>
     </SafeAreaView>

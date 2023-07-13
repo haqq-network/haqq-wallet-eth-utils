@@ -27,6 +27,10 @@ class Wallet {
     _privateKey = pk.decodeHex()
   }
 
+  fun clean() {
+    _privateKey = ByteArray(32)
+  }
+
   constructor(seed: String, masterSecret: ByteArray) {
     val signingKey = SecretKeySpec(masterSecret, hmacAlgo)
     val mac = Mac.getInstance(hmacAlgo)

@@ -51,6 +51,11 @@ class Mnemonic {
     _pass = pass
   }
 
+  fun clean() {
+    _phrase = listOf();
+    _pass = ""
+  }
+
   fun isValid(): Boolean {
     var bits = ""
 

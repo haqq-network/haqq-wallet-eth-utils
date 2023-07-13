@@ -12,6 +12,7 @@
 - [generateMnemonic](modules.md#generatemnemonic)
 - [generateMnemonicFromEntropy](modules.md#generatemnemonicfromentropy)
 - [hashMessage](modules.md#hashmessage)
+- [seedFromEntropy](modules.md#seedfromentropy)
 - [seedFromMnemonic](modules.md#seedfrommnemonic)
 - [sign](modules.md#sign)
 
@@ -35,7 +36,7 @@ Get account address and public key by privateKey
 
 #### Defined in
 
-[native-modules.ts:79](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/162cbcb/src/native-modules.ts#L79)
+[native-modules.ts:89](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/162cbcb/src/native-modules.ts#L89)
 
 ___
 
@@ -60,7 +61,7 @@ Derive hd path for seed phrase
 
 #### Defined in
 
-[native-modules.ts:71](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/162cbcb/src/native-modules.ts#L71)
+[native-modules.ts:81](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/162cbcb/src/native-modules.ts#L81)
 
 ___
 
@@ -158,7 +159,31 @@ Hash message
 
 #### Defined in
 
-[native-modules.ts:108](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/162cbcb/src/native-modules.ts#L108)
+[native-modules.ts:118](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/162cbcb/src/native-modules.ts#L118)
+
+___
+
+### seedFromEntropy
+
+▸ **seedFromEntropy**(`entropy`): `Promise`<`string`\>
+
+Generate seed phrase from entropy
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `entropy` | `Buffer` | Entropy for seed phrase |
+
+#### Returns
+
+`Promise`<`string`\>
+
+- Promise resolving to stringified data
+
+#### Defined in
+
+[native-modules.ts:70](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/162cbcb/src/native-modules.ts#L70)
 
 ___
 
@@ -209,4 +234,4 @@ Sign transaction
 
 #### Defined in
 
-[native-modules.ts:97](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/162cbcb/src/native-modules.ts#L97)
+[native-modules.ts:107](https://github.com/haqq-network/haqq-wallet-provider-web3-utils/blob/162cbcb/src/native-modules.ts#L107)
