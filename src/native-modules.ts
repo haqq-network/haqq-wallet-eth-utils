@@ -9,13 +9,13 @@ const LINKING_ERROR =
 const HaqqWeb3UtilsRN = NativeModules.HaqqWeb3UtilsRN
   ? NativeModules.HaqqWeb3UtilsRN
   : new Proxy(
-    {},
-    {
-      get() {
-        throw new Error(LINKING_ERROR);
+      {},
+      {
+        get() {
+          throw new Error(LINKING_ERROR);
+        },
       },
-    },
-  );
+    );
 
 /**
  * Generate entropy with strength
