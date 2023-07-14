@@ -91,7 +91,7 @@ public class Mnemonic {
   }
     
   public func clean() {
-      mnemonic = [String](count: 12, repeatedValue: "")
+      mnemonic = []
       passphrase = ""
   }
       

@@ -68,7 +68,7 @@ public class Wallet {
   }
 
   public func clean() {
-    privateKey = [UInt8](count: 32, repeatedValue: 0x0)
+    privateKey = []
   }
     
   public func sign(_ message: [UInt8]) throws -> [UInt8] {

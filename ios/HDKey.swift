@@ -52,8 +52,8 @@ public class HDKey {
   }
     
   public func clean() {
-      privateKey = [UInt8](count: 32, repeatedValue: 0x0)
-      chainCode = [UInt8](count: 32, repeatedValue: 0x0)
+      privateKey = []
+      chainCode = []
   }
       
   
